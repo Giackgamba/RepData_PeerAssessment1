@@ -2,7 +2,7 @@
 title: "Reproducible Research: Peer Assessment 1"
 author: Giacomo Gamba
 output: 
-html_document:
+html_document: 
 keep_md: true
 ---
 
@@ -37,7 +37,7 @@ dfSum
 #### 2. Make a histogram of the total number of steps taken each day
 
 For each interval of number of steps (each whith a range of 1000 steps) plot the number of days it happened.
-```{r fig.width=8}
+```{r histogram1, fig.width=8}
 p <- ggplot(data = dfSum, aes(x = steps))  + geom_histogram(fill = 'light blue', color =' black', binwidth = 1000) + theme_minimal()
 p
 ```
@@ -57,7 +57,7 @@ sumMedian
 #### 1. Make a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 
 Create a dataframe containing the averages across all days for each interval then plot it
-```{r}
+```{r average1, fig.width=8}
 dfInterval <- df %>%
   group_by(interval) %>%
   summarise(steps = mean(steps, na.rm = T))
@@ -101,7 +101,7 @@ dfNew <- df %>%
 ```
 
 #### 4. Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
-```{r}
+```{r histogram2, fig.width=8}
 
 dfNewSum <- dfNew %>%
   group_by(date) %>%
@@ -126,7 +126,7 @@ The median instead changes a bit because the observations has changed moving the
 #### 1. Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.
 
 
-```{r}
+```{r average2, fig.width=8}
 dfNewDays <- dfNew %>%
   mutate(wday = ifelse(wday(date) %in% c(1,7), 'weekday','weekend')) %>%
   group_by(interval, wday) %>%
